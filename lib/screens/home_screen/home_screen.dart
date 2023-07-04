@@ -5,6 +5,7 @@ import 'package:weather/main.dart';
 import 'package:weather/models/current_weather.dart';
 import 'package:weather/screens/home_screen/weather_bg_widget.dart';
 import 'package:weather/screens/home_screen/weather_card.dart';
+import 'package:weather/screens/home_screen/weather_card_sec.dart';
 import 'package:weather/screens/widgets/ui_constants.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -32,30 +33,70 @@ class HomeScreen extends StatelessWidget {
                       return const CircularProgressIndicator();
                     }
                     if (controller.currentWeather == null) {
-                      return Center(
-                        child: Column(
-                          children: [
-                            const Text("Something Went Wrong!!"),
-                            UIConstants.gapHeight20,
-                            UIConstants.gapHeight20,
-                            OutlinedButton(
-                                onPressed: () => controller.getCurrentWeather(),
-                                child: const Icon(
-                                  Icons.refresh,
-                                  size: 55,
-                                )),
-                          ],
-                        ),
-                      );
+                      return const _WeatherErrorWidget();
                     }
                     CurrentWeather currentWeather = controller.currentWeather!;
-                    return WeatherCard(currentWeather: currentWeather);
+                    return Column(
+                      children: [
+                        WeatherCard(currentWeather: currentWeather),
+                        UIConstants.gapHeight20,
+                        WeatherCardSec(currentWeather: currentWeather)
+                      ],
+                    );
                   }),
                 ],
               ),
             ),
+            const FloatingButton()
           ],
         )),
+      ),
+    );
+  }
+}
+
+class FloatingButton extends StatelessWidget {
+  const FloatingButton({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return context.watch<WeatherController>().isFromGPS
+        ? const SizedBox()
+        : Align(
+            alignment: Alignment.bottomRight,
+            child: Padding(
+              padding: UIConstants.paddingAll20,
+              child: FloatingActionButton(
+                onPressed: () => context.read<WeatherController>().getCurrentWeather(),
+                child: const Icon(Icons.gps_fixed),
+              ),
+            ),
+          );
+  }
+}
+
+class _WeatherErrorWidget extends StatelessWidget {
+  const _WeatherErrorWidget({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Column(
+        children: [
+          const Text("Something Went Wrong!!"),
+          UIConstants.gapHeight20,
+          UIConstants.gapHeight20,
+          OutlinedButton(
+              onPressed: () => context.read<WeatherController>().getCurrentWeather(),
+              child: const Icon(
+                Icons.refresh,
+                size: 55,
+              )),
+        ],
       ),
     );
   }
