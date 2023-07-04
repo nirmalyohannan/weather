@@ -11,6 +11,8 @@ class WeatherController extends ChangeNotifier {
   bool currentLoading = true;
   CurrentWeather? currentWeather;
 
+  bool isFromGPS = false;
+
   void init() {
     currentWeather = DB.getWeather();
     if (currentWeather == null) {
@@ -21,6 +23,11 @@ class WeatherController extends ChangeNotifier {
   }
 
   void getCurrentWeather({String? place}) async {
+    if (place == null) {
+      isFromGPS = true;
+    } else {
+      isFromGPS = false;
+    }
     CurrentWeather? previousWeather = currentWeather;
     currentLoading = true;
     await Future.delayed(const Duration(seconds: 0));
