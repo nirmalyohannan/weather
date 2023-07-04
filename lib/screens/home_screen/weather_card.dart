@@ -43,8 +43,9 @@ class WeatherCard extends StatelessWidget {
           Align(
             alignment: Alignment.centerLeft,
             child: Text(
-              "Time: ${parseTime(currentWeather.location!.localtime!)}",
-              style: Theme.of(context).textTheme.titleLarge,
+              "${parseTime(currentWeather.location!.localtime!)}",
+              style:
+                  const TextStyle(color: Colors.black54, fontWeight: FontWeight.bold, fontSize: 30),
             ),
           )
         ],

@@ -12,7 +12,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    context.read<WeatherController>().getCurrentWeather();
+    context.read<WeatherController>().init();
     return ScaffoldMessenger(
       key: scaffoldKey,
       child: Scaffold(
@@ -32,7 +32,21 @@ class HomeScreen extends StatelessWidget {
                       return const CircularProgressIndicator();
                     }
                     if (controller.currentWeather == null) {
-                      return const Text("Something Went Wrong!!");
+                      return Center(
+                        child: Column(
+                          children: [
+                            const Text("Something Went Wrong!!"),
+                            UIConstants.gapHeight20,
+                            UIConstants.gapHeight20,
+                            OutlinedButton(
+                                onPressed: () => controller.getCurrentWeather(),
+                                child: const Icon(
+                                  Icons.refresh,
+                                  size: 55,
+                                )),
+                          ],
+                        ),
+                      );
                     }
                     CurrentWeather currentWeather = controller.currentWeather!;
                     return WeatherCard(currentWeather: currentWeather);
