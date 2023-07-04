@@ -10,6 +10,7 @@ class WeatherController extends ChangeNotifier {
   CurrentWeather? currentWeather;
 
   void getCurrentWeather({String? place}) async {
+    CurrentWeather? previousWeather = currentWeather;
     currentLoading = true;
     await Future.delayed(const Duration(seconds: 0));
     notifyListeners();
@@ -22,6 +23,9 @@ class WeatherController extends ChangeNotifier {
           await WeatherService.getCurrentWeather("${position!.latitude},${position!.longitude}");
     }
     currentLoading = false;
+    if (currentWeather == null && previousWeather != null) {
+      currentWeather = previousWeather;
+    }
     notifyListeners();
   }
 }
