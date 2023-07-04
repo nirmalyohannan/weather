@@ -35,11 +35,8 @@ class WeatherBgWidget extends StatelessWidget {
                               height: size.height,
                               fit: BoxFit.cover,
                             ),
-                            Lottie.network(
-                                "https://assets8.lottiefiles.com/packages/lf20_vrbtloig.json",
-                                width: size.width,
-                                height: size.height,
-                                fit: BoxFit.cover)
+                            Lottie.asset(Assets.lottieSnow,
+                                width: size.width, height: size.height, fit: BoxFit.cover)
                           ],
                         );
                       } else if (tempC < 18) {
@@ -74,8 +71,8 @@ class WeatherBgWidget extends StatelessWidget {
                     }),
                     Visibility(
                         visible: isRaning,
-                        child: Lottie.network(
-                          "https://assets1.lottiefiles.com/packages/lf20_h0cc4ii6.json",
+                        child: Lottie.asset(
+                          Assets.lottieRain,
                           width: size.width,
                           height: size.height,
                           fit: BoxFit.cover,
