@@ -4,7 +4,10 @@ import 'package:weather/controllers/weather_controller.dart';
 import 'package:weather/screens/home_screen/home_screen.dart';
 import 'package:weather/screens/widgets/ui_constants.dart';
 
-void main() {
+import 'database/db.dart';
+
+void main() async {
+  await DB.init();
   runApp(const MyApp());
 }
 

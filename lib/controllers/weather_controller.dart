@@ -4,10 +4,21 @@ import 'package:weather/models/current_weather.dart';
 import 'package:weather/services/location_service.dart';
 import 'package:weather/services/weather_service.dart';
 
+import '../database/db.dart';
+
 class WeatherController extends ChangeNotifier {
   Position? position;
   bool currentLoading = true;
   CurrentWeather? currentWeather;
+
+  void init() {
+    currentWeather = DB.getWeather();
+    if (currentWeather == null) {
+      getCurrentWeather();
+    } else {
+      getCurrentWeather(place: currentWeather!.location!.name!);
+    }
+  }
 
   void getCurrentWeather({String? place}) async {
     CurrentWeather? previousWeather = currentWeather;
@@ -26,6 +37,7 @@ class WeatherController extends ChangeNotifier {
     if (currentWeather == null && previousWeather != null) {
       currentWeather = previousWeather;
     }
+    DB.writeWeather(currentWeather);
     notifyListeners();
   }
 }

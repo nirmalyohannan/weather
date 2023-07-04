@@ -4,7 +4,7 @@ class CurrentWeather {
 
   CurrentWeather({this.location, this.current});
 
-  CurrentWeather.fromJson(Map<String, dynamic> json) {
+  CurrentWeather.fromJson(Map<dynamic, dynamic> json) {
     location = json['location'] != null ? Location.fromJson(json['location']) : null;
     current = json['current'] != null ? Current.fromJson(json['current']) : null;
   }
@@ -41,7 +41,7 @@ class Location {
       this.localtimeEpoch,
       this.localtime});
 
-  Location.fromJson(Map<String, dynamic> json) {
+  Location.fromJson(Map<dynamic, dynamic> json) {
     name = json['name'];
     region = json['region'];
     country = json['country'];
@@ -116,7 +116,7 @@ class Current {
       this.gustMph,
       this.gustKph});
 
-  Current.fromJson(Map<String, dynamic> json) {
+  Current.fromJson(Map<dynamic, dynamic> json) {
     lastUpdatedEpoch = json['last_updated_epoch'];
     lastUpdated = json['last_updated'];
     tempC = json['temp_c'];
@@ -180,7 +180,7 @@ class Condition {
 
   Condition({this.text, this.icon, this.code});
 
-  Condition.fromJson(Map<String, dynamic> json) {
+  Condition.fromJson(Map<dynamic, dynamic> json) {
     text = json['text'];
     icon = json['icon'];
     code = json['code'];
