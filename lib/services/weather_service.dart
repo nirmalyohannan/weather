@@ -1,7 +1,9 @@
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:weather/main.dart';
 import 'package:weather/models/current_weather.dart';
 
 import '../config/api_endpoints.dart';
@@ -24,6 +26,15 @@ class WeatherService {
       }
     } catch (e) {
       log(e.toString());
+      switch (e.toString()) {
+        case "Failed host lookup: 'api.weatherapi.com'":
+          scaffoldKey.currentState!.showSnackBar(const SnackBar(
+            content: Text("Check Internet connectivity!"),
+          ));
+          break;
+        default:
+          scaffoldKey.currentState!.showSnackBar(SnackBar(content: Text(e.toString())));
+      }
       return null;
     }
   }

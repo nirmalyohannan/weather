@@ -13,5 +13,7 @@ class UIConstants {
 
   //-------------------------------
   static const paddingHor10 = EdgeInsets.symmetric(horizontal: 10);
+  static const paddingHor20 = EdgeInsets.symmetric(horizontal: 20);
+
   static const paddingAll10 = EdgeInsets.all(10);
 }

@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:weather/controllers/weather_controller.dart';
 import 'package:weather/screens/home_screen/home_screen.dart';
+import 'package:weather/screens/widgets/ui_constants.dart';
 
 void main() {
   runApp(const MyApp());
 }
+
+final GlobalKey<ScaffoldMessengerState> scaffoldKey = GlobalKey<ScaffoldMessengerState>();
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -20,11 +23,37 @@ class MyApp extends StatelessWidget {
         )
       ],
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'Weather',
         theme: ThemeData(
-          primarySwatch: Colors.blue,
+          textTheme: const TextTheme(
+            headlineMedium: TextStyle(color: Colors.black87),
+            displayLarge: TextStyle(fontWeight: FontWeight.bold),
+          ),
+          //----------------------------
+          inputDecorationTheme: const InputDecorationTheme(
+            hintStyle: TextStyle(color: Colors.black54),
+            border: InputBorder.none,
+            fillColor: Colors.white24,
+            filled: true,
+            enabledBorder: OutlineInputBorder(
+              borderRadius: UIConstants.borderRadiusMed,
+              borderSide: BorderSide(
+                width: 0,
+                style: BorderStyle.none,
+              ),
+            ),
+            focusColor: Colors.white24,
+            focusedBorder: OutlineInputBorder(
+              borderRadius: UIConstants.borderRadiusMed,
+              borderSide: BorderSide(
+                width: 0,
+                style: BorderStyle.none,
+              ),
+            ),
+          ),
         ),
-        home: HomeScreen(),
+        home: const HomeScreen(),
       ),
     );
   }
