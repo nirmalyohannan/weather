@@ -18,7 +18,8 @@ class WeatherService {
       http.Response response = await http.get(Uri.parse(path));
 
       if (response.statusCode == 200) {
-        CurrentWeather currentWeather = CurrentWeather.fromJson(jsonDecode(response.body));
+        CurrentWeather currentWeather =
+            CurrentWeather.fromJson(jsonDecode(response.body));
         return currentWeather;
       } else {
         log("Something Wrong");
@@ -33,7 +34,8 @@ class WeatherService {
           ));
           break;
         default:
-          scaffoldKey.currentState!.showSnackBar(SnackBar(content: Text(e.toString())));
+          scaffoldKey.currentState!
+              .showSnackBar(SnackBar(content: Text(e.toString())));
       }
       return null;
     }
