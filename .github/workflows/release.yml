@@ -30,7 +30,6 @@ jobs:
         body: |
           Changes in this release:
           - Bug fixes
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Upload Release Asset
       id: upload-release-asset
@@ -40,4 +39,3 @@ jobs:
         asset_path: build/app/outputs/flutter-apk/app-release.apk
         asset_name: app-release.apk
         asset_content_type: application/vnd.android.package-archive
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
