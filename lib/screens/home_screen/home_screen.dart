@@ -17,6 +17,9 @@ class HomeScreen extends StatelessWidget {
     return ScaffoldMessenger(
       key: scaffoldKey,
       child: Scaffold(
+        extendBody: true,
+        extendBodyBehindAppBar: true,
+        backgroundColor: Colors.transparent,
         body: SafeArea(
             child: Stack(
           alignment: Alignment.center,
