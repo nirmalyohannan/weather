@@ -24,9 +24,9 @@ jobs:
       with:
         flutter-version: '3.29.2'  # Specify the Flutter version
     
-    # accept licence
-    - name: Accept Android Licence
-      run: yes | ~/Android/Sdk/tools/bin/sdkmanager --licenses
+    # Setup Android SDK
+    - name: Setup Android SDK
+      uses: android-actions/setup-android@v2
 
     - name: Install dependencies
       run: flutter pub get
