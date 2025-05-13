@@ -28,7 +28,8 @@ class HomeScreen extends StatelessWidget {
                 children: [
                   _SearchWidget(),
                   UIConstants.gapHeight20,
-                  Consumer<WeatherController>(builder: (context, controller, child) {
+                  Consumer<WeatherController>(
+                      builder: (context, controller, child) {
                     if (controller.currentLoading) {
                       return const CircularProgressIndicator();
                     }
@@ -69,7 +70,8 @@ class FloatingButton extends StatelessWidget {
             child: Padding(
               padding: UIConstants.paddingAll20,
               child: FloatingActionButton(
-                onPressed: () => context.read<WeatherController>().getCurrentWeather(),
+                onPressed: () =>
+                    context.read<WeatherController>().getCurrentWeather(),
                 child: const Icon(Icons.gps_fixed),
               ),
             ),
@@ -78,9 +80,7 @@ class FloatingButton extends StatelessWidget {
 }
 
 class _WeatherErrorWidget extends StatelessWidget {
-  const _WeatherErrorWidget({
-    super.key,
-  });
+  const _WeatherErrorWidget();
 
   @override
   Widget build(BuildContext context) {
@@ -91,7 +91,8 @@ class _WeatherErrorWidget extends StatelessWidget {
           UIConstants.gapHeight20,
           UIConstants.gapHeight20,
           OutlinedButton(
-              onPressed: () => context.read<WeatherController>().getCurrentWeather(),
+              onPressed: () =>
+                  context.read<WeatherController>().getCurrentWeather(),
               child: const Icon(
                 Icons.refresh,
                 size: 55,
@@ -112,9 +113,9 @@ class _SearchWidget extends StatelessWidget {
     return TextField(
       controller: searchController,
       onEditingComplete: () {
-        context
-            .read<WeatherController>()
-            .getCurrentWeather(place: searchController.text.isEmpty ? null : searchController.text);
+        context.read<WeatherController>().getCurrentWeather(
+            place:
+                searchController.text.isEmpty ? null : searchController.text);
         FocusScope.of(context).unfocus();
       },
       decoration: const InputDecoration(hintText: "Search places"),
