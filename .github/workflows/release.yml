@@ -23,6 +23,10 @@ jobs:
       uses: subosito/flutter-action@v2
       with:
         flutter-version: '3.29.2'  # Specify the Flutter version
+    
+    # accept licence
+    - name: Accept Android Licence
+      run: yes | ~/Android/Sdk/tools/bin/sdkmanager --licenses
 
     - name: Install dependencies
       run: flutter pub get
