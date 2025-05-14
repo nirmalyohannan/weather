@@ -46,15 +46,12 @@ jobs:
       run: flutter build apk --release
 
     - name: Create Release
-      uses: softprops/action-gh-release@v1
+      uses: softprops/action-gh-release@v2
       with:
-          files: build/app/outputs/flutter-apk/app-*.apk
-          tag_name: ${{ github.ref_name }}
-          name: Release ${{ github.ref_name }}
-          body: |
-            Automatically generated release for ${{ github.ref_name }}
+        files: build/app/outputs/flutter-apk/app-release.apk
+        tag_name: v${{ steps.version.outputs.version }}
       env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     # - name: Upload Release Asset
     #   id: upload-release-asset
