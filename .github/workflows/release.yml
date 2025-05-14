@@ -40,7 +40,7 @@ jobs:
     # Create credentials.dart in /lib/config/
     - name: Create credentials.dart
       run: |
-        echo "class Credentials {static const apiKey = '${{ secrets.API_KEY }}';}';" > lib/config/credentials.dart
+        echo "class Credentials {static const apiKey = '${{ secrets.API_KEY }}';}" > lib/config/credentials.dart
 
     - name: Build Android Release
       run: flutter build apk --release
