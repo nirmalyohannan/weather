@@ -46,25 +46,23 @@ jobs:
       run: flutter build apk --release
 
     - name: Create Release
-      id: create_release
-      uses: actions/create-release@v2
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      uses: softprops/action-gh-release@v1
       with:
-        tag_name: v${{ steps.version.outputs.version }}
-        release_name: Release v${{ steps.version.outputs.version }}
-        draft: false
-        prerelease: false
-        body: |
-          Release version ${{ steps.version.outputs.version }}
+          files: build/app/outputs/flutter-apk/app-*.apk
+          tag_name: ${{ github.ref_name }}
+          name: Release ${{ github.ref_name }}
+          body: |
+            Automatically generated release for ${{ github.ref_name }}
+      env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: Upload Release Asset
-      id: upload-release-asset
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: build/app/outputs/flutter-apk/app-release.apk
-        asset_name: weather-${{ steps.version.outputs.version }}.apk
-        asset_content_type: application/vnd.android.package-archive
+    # - name: Upload Release Asset
+    #   id: upload-release-asset
+    #   uses: actions/upload-release-asset@v1
+    #   env:
+    #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    #   with:
+    #     upload_url: ${{ steps.create_release.outputs.upload_url }}
+    #     asset_path: build/app/outputs/flutter-apk/app-release.apk
+    #     asset_name: weather-${{ steps.version.outputs.version }}.apk
+    #     asset_content_type: application/vnd.android.package-archive
